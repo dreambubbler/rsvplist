@@ -6,6 +6,5 @@ package: RSVP List
 
 dependencies:
   - drupal:block
-  - token:token
 
 configure: rsvplist.admin_settings
