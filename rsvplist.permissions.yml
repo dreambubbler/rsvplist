@@ -8,4 +8,4 @@ administer rsvplist:
   title: 'Administer RSVP Settings'
   description: 'Access the RSVP administrative settings page.'
   restrict access: true
-  
+
