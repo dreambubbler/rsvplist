@@ -34,4 +34,9 @@ class RSVPListForm extends FormBase {
     }
     return NULL;
   }
+
+  public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state)
+  {
+    // TODO: Implement submitForm() method.
+  }
 }
