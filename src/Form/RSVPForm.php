@@ -8,7 +8,6 @@
 namespace Drupal\rsvplist\Form;
 
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Messenger\MessengerInterface;
 
 
 
