@@ -8,7 +8,7 @@
 namespace Drupal\rsvplist\Form;
 
 use Drupal\Core\Form\FormBase;
-
+use Drupal\Core\Messenger\MessengerInterface;
 
 
 
@@ -63,7 +63,7 @@ class RSVPForm extends FormBase {
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $email = $form_state->getValue('email');
-    $this->messenger->addMessage(t("The form is working. The user entered @entry.",
+    $this->messenger()->addMessage(t("The form is working. The user entered @entry.",
                                   ['@entry' => $email]));
   }
 }
