@@ -84,7 +84,7 @@ class RSVPForm extends FormBase {
 
     // Demonstration for how to load a full user object of the current user. This variable is not needed for this code,
     // but is shown for demonstration purposes.
-    $user = \Drupal\user\Entity\User::load($uid);
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
 
     // Establish the required variables to eventually insert into the database.
     $email = $form_state->getValue('email');
