@@ -5,7 +5,7 @@
  * A form to collect an email address.
  */
 
-namespace Drupal\rsvplist\Form\RSVPForm;
+namespace Drupal\rsvplist\Form;
 
 use Drupal\Core\Form\FormBase;
 
