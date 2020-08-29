@@ -1,6 +1,8 @@
 <?php
 
 function rsvplist_schema() {
+  // Create a database table called 'rsvplist' wit the following fields:
+  // 1) id [serial], 2) uid [int], 3) nid [int], 4) mail [varchar], 5) created [int]
   $schema['rsvplist'] = [
     'description' => 'Stores email, timestamp, nid and uid for an RSVP.',
     'fields' => [
@@ -44,6 +46,8 @@ function rsvplist_schema() {
     ],
   ];
 
+  // Create a database table named 'rsvplist_enabled' with the following fields:
+  // 1) nid [int]
   $schema['rsvplist_enabled'] = [
     'description' => 'Tracks whether RSVP is enabled or not for a node.',
     'fields' => [
@@ -55,6 +59,7 @@ function rsvplist_schema() {
         'default' => 0,
       ],
     ],
+    'primary key' => ['nid'],
   ];
 
   return $schema;
