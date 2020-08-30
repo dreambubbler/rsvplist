@@ -14,3 +14,13 @@ rsvplist.admin_settings:
     _title: RSVP List Settings
   requirements:
     _permission: administer rsvplist
+
+
+# Use for exercise 3.8.1 Add Routing and Menu Link for RSVP Report Page
+rsvplist.report:
+  path: /admin/reports/rsvplist
+  defaults:
+    _controller: \Drupal\rsvplist\Controller\ReportController::report
+    _title: List of RSVPs
+  requirements:
+    _permission: access rsvplist report
