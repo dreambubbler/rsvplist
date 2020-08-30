@@ -59,10 +59,10 @@ class RSVPBlock extends BlockBase {
       $class = get_class($node);
       \Drupal::messenger()->addMessage(t('node type is @type with class of @class', ['@type' => $type, '@class' => $class]));
 
-      $nid = \Drupal::routeMatch()->getRawParameter('node');
+      $nid = 2; // \Drupal::routeMatch()->getRawParameter('node');
       \Drupal::messenger()->addMessage('Node id is: @nid', ['@nid' => $nid]);
 
-      
+
       return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
     }
     else {
