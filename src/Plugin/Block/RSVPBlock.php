@@ -12,6 +12,8 @@ use Drupal\Core\Block\BlockBase;
 
 
 /**
+ * Provides the RSVP main block.
+ *
  * @Block(
  *   id = "rsvp_block",
  *   admin_label = @Translation("RSVP Block")
