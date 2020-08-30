@@ -51,7 +51,8 @@ class RSVPBlock extends BlockBase {
     $node = \Drupal::routeMatch()->getParameter('node');
 
     $type = gettype($node);
-    \Drupal::messenger()->addMessage(t('node type is @type', ['@type' => $type]));
+    $class = get_class($node);
+    \Drupal::messenger()->addMessage(t('node type is @type with class of @class', ['@type' => $type, '@class' => $class]));
 
     // Some pages may not be nodes, although we could not display the block using the Block Settings through
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
