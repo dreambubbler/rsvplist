@@ -16,7 +16,7 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "rsvp_block",
- *   admin_label = @Translation("RSVP Block")
+ *   admin_label = @Translation("The RSVP Block")
  * )
  */
 class RSVPBlock extends BlockBase {
@@ -26,9 +26,11 @@ class RSVPBlock extends BlockBase {
    */
   public function build()
   {
+    // Use this code for exercise 03_10_Adding a Block
     return [
       '#type' => 'markup',
       '#markup' => $this->t('My RSVP List Block'),
     ];
+    // end 03_10 03_10_Adding a Block
   }
 }
