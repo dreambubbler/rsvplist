@@ -47,9 +47,14 @@ class RSVPBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockAccess(AccountInterface $account) {
+    // If viewing a node, get the fully loaded node object.
     $node = \Drupal::routeMatch()->getParameter('node');
-    $nid = $node->id(); //$nid = $node->nid->value;
-    if (is_numeric($nid)) {
+
+    // Some pages may not be nodes, although we could not display the block using the Block Settings through
+    // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
+    // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
+
+    if ($node instanceof \Drupal\node\NodeInterface) {
       return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
     }
     else {
