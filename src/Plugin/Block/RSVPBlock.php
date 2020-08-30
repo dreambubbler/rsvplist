@@ -17,6 +17,7 @@ use Drupal\Core\Block\BlockBase;
  * @Block(
  *   id = "rsvp_block",
  *   admin_label = @Translation("RSVP Block")
+ *   category = @Translation("RSVP")
  * )
  */
 class RSVPBlock extends BlockBase {
