@@ -50,6 +50,9 @@ class RSVPBlock extends BlockBase {
     // If viewing a node, get the fully loaded node object.
     $node = \Drupal::routeMatch()->getParameter('node');
 
+    $type = gettype($node);
+    \Drupal::messenger()->addMessage(t('node type is @type', ['@type' => $type]));
+
     // Some pages may not be nodes, although we could not display the block using the Block Settings through
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
     // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
