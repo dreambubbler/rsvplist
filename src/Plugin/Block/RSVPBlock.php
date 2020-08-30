@@ -54,7 +54,7 @@ class RSVPBlock extends BlockBase {
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
     // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
 
-    if ($node instanceof \Drupal\node\NodeInterface) {
+    if (!is_null($node)) {
       $type = gettype($node);
       $class = get_class($node);
       \Drupal::messenger()->addMessage(t('node type is @type with class of @class', ['@type' => $type, '@class' => $class]));
