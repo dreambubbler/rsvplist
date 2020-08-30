@@ -54,6 +54,9 @@ class RSVPBlock extends BlockBase {
     $class = get_class($node);
     \Drupal::messenger()->addMessage(t('node type is @type with class of @class', ['@type' => $type, '@class' => $class]));
 
+    $nid = \Drupal::routeMatch()->getRawParameter('node');
+    \Drupal::messenger()->addMessage('Node id is: @nid', ['@nid' => $nid]);
+
     // Some pages may not be nodes, although we could not display the block using the Block Settings through
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
     // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
