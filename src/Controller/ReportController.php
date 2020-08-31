@@ -55,31 +55,14 @@ class ReportController extends ControllerBase {
     ];
 
     $rows = [];
-
-    $load_entries = $this->load();
-    dpm($load_entries);
-
     foreach ($entries = $this->load() as $entry) {
-      // Sanitize each value of each entry.
-      //$rows[] = array_map('Drupal\Component\Utility\Html::decodeEntities', $entry);
       $rows[] = $entry;
-      dpm($entry);
-
-      // Doesn't work
-      /*$current_row = [];
-      foreach ($entry as $value) {
-        $current_row[] = ['#plain_text' => $value];
-      }
-
-      $rows[] = $current_row;*/
-
-      // Doesn't work: $rows[] = ['#plain_text' => $entry];
     }
-    dpm($rows);
+
     $content['table'] = [
       '#type' => 'table',
       '#header' => $headers,
-      '#rows' => $rows,
+      '#rows' => ['#plain_text' => $rows],
       '#empty' => t('No entries available.'),
     ];
 
