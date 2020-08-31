@@ -55,19 +55,14 @@ class RSVPBlock extends BlockBase {
     // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
 
     if (!is_null($node)) {
-      $type = gettype($node);
-      $class = get_class($node);
-      \Drupal::messenger()->addMessage(t('node type is @type with class of @class', ['@type' => $type, '@class' => $class]));
+      $enabler = \Drupal::service('rsvplist.enabler');
+      if ($enabler->isEnabled($node)) {
 
-      $nid = \Drupal::routeMatch()->getRawParameter('node');
-      \Drupal::messenger()->addMessage(t('Node id is: @nid', ['@nid' => $nid]));
-
-
-      return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
+        return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
+      }
     }
     else {
       return AccessResult::forbidden();
     }
   }
-
 }
