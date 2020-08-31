@@ -61,7 +61,8 @@ class ReportController extends ControllerBase {
 
     foreach ($entries = $this->load() as $entry) {
       // Sanitize each value of each entry.
-      $rows[] = array_map('Drupal\Component\Utility\Html::decodeEntities', $entry);
+      //$rows[] = array_map('Drupal\Component\Utility\Html::decodeEntities', $entry);
+      $rows[] = $entry;
       dpm($entry);
 
       // Doesn't work
