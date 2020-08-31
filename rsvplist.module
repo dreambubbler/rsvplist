@@ -7,11 +7,11 @@
 
 use Drupal\Core\Form\FormStateInterface;
 
-function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+/*function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   \Drupal::messenger()->addMessage("hello from rsvplist_form_alter");
   dpm("hello from rsvplist_form_node_form_alter");
   dpm($form_state);
-}
+}*/
 
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
@@ -33,7 +33,7 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
  * Implements hook_form_alter().
  */
 function rsvplist_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  dpm("hello from rsvplist_form_alter");
+  //dpm("hello from rsvplist_form_alter");
   \Drupal::messenger()->addMessage("hello from rsvplist_form_alter");
-  dpm($form_state);
+  //dpm($form_state);
 }
