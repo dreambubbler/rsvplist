@@ -62,7 +62,7 @@ class ReportController extends ControllerBase {
     $content['table'] = [
       '#type' => 'table',
       '#header' => $headers,
-      '#rows' => ['#plain_text' => $rows],
+      '#rows' => $rows,
       '#empty' => t('No entries available.'),
     ];
 
