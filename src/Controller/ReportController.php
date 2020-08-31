@@ -61,12 +61,13 @@ class ReportController extends ControllerBase {
 
     foreach ($entries = $this->load() as $entry) {
       // Sanitize each value of each entry.
-      $current_row = [];
+      $rows[] = array_map('Drupal\Component\Utility\Html::escape', $entry);
+      /*$current_row = [];
       foreach ($entry as $value) {
         $current_row[] = ['#plain_text' => $value];
       }
 
-      $rows[] = $current_row;
+      $rows[] = $current_row;*/
     }
     $content['table'] = [
       '#type' => 'table',
