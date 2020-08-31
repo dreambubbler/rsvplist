@@ -11,6 +11,7 @@ namespace Drupal\rsvplist;
 use Drupal\Core\Database\Database;
 use Drupal\jsonapi\JsonApiResource\Data;
 use Drupal\node\Entity\Node;
+use Exception;
 
 class EnablerService {
 
@@ -22,17 +23,17 @@ class EnablerService {
    * Sets an individual node to be RSVP enabled.
    *
    * @param Node $node
-   * @throws \Exception
+   * @throws Exception
    */
   public function setEnabled(Node $node) {
     try {
-      if (!this->isEnabled($node)) {
+      if ($this->isEnabled($node)) {
         $insert = Database::getConnection()->insert('rsvplist_enabled');
         $insert->fields(['nid'], [$node->id()]);
         $insert->execute();
       }
     }
-    catch (\Exception $e) {
+    catch (Exception $e) {
       \Drupal::messenger()->addError(t('Unable to save RSVP settings at this time due to database error. Please try again.'));
     }
   }
