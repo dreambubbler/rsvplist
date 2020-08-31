@@ -47,12 +47,12 @@ class EnablerService {
    * @return bool
    *  whether or not the node is enabled for the RSVP functionality.
    */
-  public function isEnabled(Node $node) {
+  public function isEnabled(Node &$node) {
     if ($node->isNew()) {
       return FALSE;
     }
     $select = Database::getConnection()->select('rsvplist_enabled', 're');
-    $select->fields('re', ['nid']);
+    $select->fields(['nid']);
     $select->condition('nid', $node->id());
     $results = $select->execute();
 
