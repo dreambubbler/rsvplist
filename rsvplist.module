@@ -38,6 +38,7 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
       '#default_value' => $enabler->isEnabled($node),
     ];
 
+    dpm($form);
     foreach ( array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions']['#type']) &&
           $form['actions'][$action]['#type'] === 'submit') {
