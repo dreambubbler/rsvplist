@@ -55,6 +55,10 @@ class ReportController extends ControllerBase {
     ];
 
     $rows = [];
+
+    $load_entries = $this->load();
+    dpm($load_entries);
+
     foreach ($entries = $this->load() as $entry) {
       // Sanitize each value of each entry.
       $current_row = [];
