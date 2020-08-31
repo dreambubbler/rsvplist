@@ -61,8 +61,7 @@ class RSVPBlock extends BlockBase {
         return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
       }
     }
-    else {
-      return AccessResult::forbidden();
-    }
+
+    return AccessResult::forbidden();
   }
 }
