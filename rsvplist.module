@@ -24,6 +24,7 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
   dpm($allowed_types);
 
   if (in_array($current_node_type, $allowed_types)) {
+    \Drupal::messenger()->addMessage(t('You are editing an allowed RSVP type of @type', ['@type' => $current_node_type]));
     $form['rsvplist'] = [
       '#type' => 'details',
       '#title' => t('RSVP Collection'),
