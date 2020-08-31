@@ -5,8 +5,10 @@
  * RSVPList module hooks.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 
-function rsvplist_form_node_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  dpm("hello from rsvplist_form_node_form_alter");
   dpm($form_state);
 }
 
