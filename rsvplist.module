@@ -13,7 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
-function rsvplist_form_BASE_FORM_ID_alter(&$form, FormStateInterface $form_state, $form_id) {
+function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   \Drupal::messenger()->addMessage(t('form_id of this form is @id', ['@id' => $form_id]));
 
 
