@@ -11,17 +11,13 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  \Drupal::messenger()->addMessage(t('form_id of this form is @id', ['@id' => $form_id]));
 
   $node = $form_state->getFormObject()->getEntity();
   $current_node_type = $node->getType();
   $rsvp_config = \Drupal::config('rsvplist.settings');
   $allowed_types = $rsvp_config->get('allowed_types');
 
-  dpm($allowed_types);
-
   if (in_array($current_node_type, $allowed_types)) {
-    \Drupal::messenger()->addMessage(t('You are editing an allowed RSVP type of @type', ['@type' => $current_node_type]));
     $form['rsvplist'] = [
       '#type' => 'details',
       '#title' => t('RSVP Collection'),
@@ -38,15 +34,12 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
       '#default_value' => $enabler->isEnabled($node),
     ];
 
-    dpm($form);
-    dpm(array_keys($form['actions']));
     foreach ( array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) &&
           $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'rsvplist_form_node_form_submit';
       }
     }
-    dpm($form);
   }
 }
 
@@ -58,11 +51,9 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
  * @param Drupal\Core\Form\FormStateInterface $form_state
  */
 function rsvplist_form_node_form_submit($form, FormStateInterface $form_state) {
-  \Drupal::messenger()->addMessage("in rsvplist_form_node_form_submit ");
 
   $enabler = \Drupal::service('rsvplist.enabler');
   $node = $form_state->getFormObject()->getEntity();
-
 
   if ($form_state->getValue('rsvplist_enabled')) {
     $enabler->setEnabled($node);
