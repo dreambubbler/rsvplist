@@ -39,8 +39,9 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
     ];
 
     dpm($form);
+    dpm(array_keys($form['actions']));
     foreach ( array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions']['#type']) &&
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) &&
           $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'rsvplist_form_node_form_submit';
       }
