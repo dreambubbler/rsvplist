@@ -52,7 +52,7 @@ class EnablerService {
       return FALSE;
     }
     $select = Database::getConnection()->select('rsvplist_enabled', 're');
-    $select->fields(['re', ['nid']);
+    $select->fields('re', ['nid']);
     $select->condition('nid', $node->id());
     $results = $select->execute();
 
