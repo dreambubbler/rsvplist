@@ -28,7 +28,7 @@ class EnablerService {
   public function setEnabled(Node $node) {
 //    try {
       \Drupal::messenger()->addMessage('in setEnabled in service.');
-      if ($this->isEnabled($node)) {
+      if (!$this->isEnabled($node)) {
         $insert = Database::getConnection()->insert('rsvplist_enabled');
         $insert->fields(['nid']);
         $insert->values([$node->id()]);
@@ -52,7 +52,7 @@ class EnablerService {
       return FALSE;
     }
     $select = Database::getConnection()->select('rsvplist_enabled', 're');
-    $select->fields(['nid']);
+    $select->fields(['re', ['nid']);
     $select->condition('nid', $node->id());
     $results = $select->execute();
 
