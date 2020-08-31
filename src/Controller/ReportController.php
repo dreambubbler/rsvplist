@@ -70,7 +70,7 @@ class ReportController extends ControllerBase {
 
       $rows[] = $current_row;*/
 
-      $rows[] = $entry;
+      $rows[] = ['#plain_text' => $entry];
     }
     dpm($rows);
     $content['table'] = [
