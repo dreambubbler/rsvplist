@@ -30,7 +30,8 @@ class EnablerService {
       \Drupal::messenger()->addMessage('in setEnabled in service.');
       if ($this->isEnabled($node)) {
         $insert = Database::getConnection()->insert('rsvplist_enabled');
-        $insert->fields(['nid'], [$node->id()]);
+        $insert->fields(['nid']);
+        $insert->values([$node->id()]);
         $insert->execute();
       }
 //    }
