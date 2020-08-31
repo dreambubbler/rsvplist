@@ -15,5 +15,5 @@ function rsvplist_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_
   \Drupal::messenger()->addMessage(t('form_id of this form is @id', ['@id' => $form_id]));
   //dpm("hello from rsvplist_form_alter");
   //\Drupal::messenger()->addMessage("hello from rsvplist_form_alter");
-  //dpm($form_state);
+  dpm($form_state);
 }
