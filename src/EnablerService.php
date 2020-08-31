@@ -26,18 +26,17 @@ class EnablerService {
    * @throws Exception
    */
   public function setEnabled(Node $node) {
-//    try {
-      \Drupal::messenger()->addMessage('in setEnabled in service.');
+    try {
       if (!$this->isEnabled($node)) {
         $insert = Database::getConnection()->insert('rsvplist_enabled');
         $insert->fields(['nid']);
         $insert->values([$node->id()]);
         $insert->execute();
       }
-//    }
-//    catch (Exception $e) {
-//      \Drupal::messenger()->addError(t('Unable to save RSVP settings at this time due to database error. Please try again.'));
-//    }
+    }
+    catch (Exception $e) {
+      \Drupal::messenger()->addError(t('Unable to save RSVP settings at this time due to database error. Please try again.'));
+    }
   }
 
   /**
