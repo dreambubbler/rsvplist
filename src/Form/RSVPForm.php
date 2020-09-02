@@ -24,7 +24,7 @@ class RSVPForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
-    // Attempt to get the fully loaded node object of the viwed page.
+    // Attempt to get the fully loaded node object of the viewed page.
     $node = \Drupal::routeMatch()->getParameter('node');
 
     // Some pages may not be nodes though and $node will be NULL on those pages.
@@ -33,6 +33,7 @@ class RSVPForm extends FormBase {
       $nid = $node->id();
     }
     else {
+      // If a node could not be loaded, default to 0;
       $nid = 0;
     }
 
@@ -80,7 +81,7 @@ class RSVPForm extends FormBase {
 
 
 
-    // < Use below code for videos 03_08 onward.
+    // < Use below code for videos 03_06_01 Creating RSVP List Subscription Block (03_08) onward.
 
     // Get current user ID.
     $uid = \Drupal::currentUser()->id();
@@ -122,5 +123,5 @@ class RSVPForm extends FormBase {
     // Provide the form submitter a nice message.
     \Drupal::messenger()->addMessage($this->t('Thank you for your RSVP, you are on the list for the event!'));
   }
-  // End 03_08 onwards. />
+  // End 03_06_01 Creating RSVP List Subscription Block (03_08) onwards. />
 }
