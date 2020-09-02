@@ -118,6 +118,6 @@ class RSVPForm extends FormBase {
     $query->execute();
 
     // Provide the form submitter a nice message.
-    $this->t('Thank you for your RSVP, you are on the list for the event!');
+    /\Drupal::messenger()->addMessage($this->t('Thank you for your RSVP, you are on the list for the event!'));
   }
 }
