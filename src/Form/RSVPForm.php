@@ -27,6 +27,7 @@ class RSVPForm extends FormBase {
   public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $node = \Drupal::routeMatch()->getParameter('node');
     $nid = $node->nid->value;
+    $nid = $node->id();
 
 /*    // Dallas modified version for getting $nid below.
     // This code is from: https://www.purencool.digital/development/how-to-i-access-an-entity-eg-node-field-in-drupal8
@@ -38,7 +39,7 @@ class RSVPForm extends FormBase {
     return NULL;*/
     $form['email'] = [
       '#title' => t('Email address'),
-      '#type' => 'textfield',
+      '#type' => 'textfield',  // Could use an 'email' field type here.
       '#size' => 25,
       '#description' => t("We will send updates to the email address you provide."),
       '#required' => TRUE,
