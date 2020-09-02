@@ -49,7 +49,7 @@ class ReportController extends ControllerBase {
     ];
 
     $headers = [
-      t('Name'),
+      t('Username'),
       t('Event'),
       t('Email'),
     ];
