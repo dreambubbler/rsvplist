@@ -38,7 +38,7 @@ class RSVPForm extends FormBase {
     return NULL;*/
     $form['email'] = [
       '#title' => t('Email address'),
-      '#type' => 'textfield',
+      '#type' => 'email',
       '#size' => 25,
       '#description' => t("We will send updates to the email address you provide."),
       '#required' => TRUE,
