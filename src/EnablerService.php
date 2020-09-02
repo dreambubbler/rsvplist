@@ -27,7 +27,7 @@ class EnablerService {
    */
   public function setEnabled(Node $node) {
     try {
-      if (!$this->isEnabled($node)) {
+      if ( !($this->isEnabled($node)) ) {
         $insert = Database::getConnection()->insert('rsvplist_enabled');
         $insert->fields(['nid']);
         $insert->values([$node->id()]);

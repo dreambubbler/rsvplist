@@ -54,7 +54,7 @@ class RSVPBlock extends BlockBase {
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
     // this block on node pages using AccessResult::allowedIfHasPermission($account, 'view rsvplist')
 
-    if (!is_null($node)) {
+    if ( !(is_null($node)) ) {
       $enabler = \Drupal::service('rsvplist.enabler');
       if ($enabler->isEnabled($node)) {
 

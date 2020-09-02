@@ -2,14 +2,13 @@
 
 /**
  * @file
- * A form to collect an email address.
+ * A form to collect an email address for RSVP details.
  */
 
 namespace Drupal\rsvplist\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-
 
 class RSVPForm extends FormBase {
 
@@ -25,31 +24,31 @@ class RSVPForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    // Attempt to get the fully loaded node object of the viwed page.
     $node = \Drupal::routeMatch()->getParameter('node');
-    $nid = $node->nid->value;
-    $nid = $node->id();
 
-/*    // Dallas modified version for getting $nid below.
-    // This code is from: https://www.purencool.digital/development/how-to-i-access-an-entity-eg-node-field-in-drupal8
-    if(\Drupal::routeMatch()->getParameter('node')){
-      $nid = \Drupal::routeMatch()->getParameter('node');
-      $node = \Drupal\node\Entity\Node::load($nid->id());
-      return $node->get($fieldName)->getValue();
+    // Some pages may not be nodes though and $node will be NULL on those pages.
+    // If a node was loaded, get the node id.
+    if ( !(is_null($node)) ) {
+      $nid = $node->id();
     }
-    return NULL;*/
+    else {
+      $nid = 0;
+    }
+
+    // Establish the $form render array. It has an email text field, a submit button,
+    // and a hidden field containing the node ID.
     $form['email'] = [
+      '#type' => 'textfield',
       '#title' => t('Email address'),
-      '#type' => 'textfield',  // Could use an 'email' field type here.
       '#size' => 25,
       '#description' => t("We will send updates to the email address you provide."),
       '#required' => TRUE,
     ];
-
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => t('RSVP'),
     ];
-
     $form['nid'] = [
       '#type' => 'hidden',
       '#value' => $nid,
@@ -73,12 +72,15 @@ class RSVPForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-    // Use this code for video 03_04_Building an RSVP Form
+    // < Use this code for video 03_02_01_Part1/2-Build the Email Submission Form for RSVP List
     //    $email = $form_state->getValue('email');
     //    $this->messenger()->addMessage(t("The form is working. The user entered @entry.",
     //                                  ['@entry' => $email]));
+    // End 03_02_01_Part1/2-Build the Email Submission Form for RSVP List />
 
-    // Use below code for videos 03_08 onward.
+
+
+    // < Use below code for videos 03_08 onward.
 
     // Get current user ID.
     $uid = \Drupal::currentUser()->id();
@@ -120,4 +122,5 @@ class RSVPForm extends FormBase {
     // Provide the form submitter a nice message.
     \Drupal::messenger()->addMessage($this->t('Thank you for your RSVP, you are on the list for the event!'));
   }
+  // End 03_08 onwards. />
 }
