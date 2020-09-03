@@ -75,7 +75,7 @@ class RSVPForm extends FormBase {
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     // < Use this code for video 03_02_01_Part1/2-Build the Email Submission Form for RSVP List
     //    $email = $form_state->getValue('email');
-    //    $this->messenger()->addMessage(t("The form is working. The user entered @entry.",
+    //    $this->messenger()->addMessage(t("The form is working. You entered @entry.",
     //                                  ['@entry' => $email]));
     // End 03_02_01_Part1/2-Build the Email Submission Form for RSVP List />
 
