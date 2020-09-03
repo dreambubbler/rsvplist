@@ -64,7 +64,7 @@ class RSVPForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $value = $form_state->getValue('email');
     if ( !(\Drupal::service('email.validator')->isValid($value)) ) {
-      $form_state->setErrorByName('email', $this->t('The email address %mail is not valid',
+      $form_state->setErrorByName('email', $this->t('It appears that %mail is not a valid email. Please try again',
                                                     ['%mail' => $value]));
     }
   }
@@ -75,7 +75,7 @@ class RSVPForm extends FormBase {
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     // < Use this code for video 03_02_01_Part1/2-Build the Email Submission Form for RSVP List
     //    $submitted_email = $form_state->getValue('email');
-    //    $this->messenger()->addMessage(t("The form is working. You entered @entry.",
+    //    $this->messenger()->addMessage(t("The form is working! You entered @entry.",
     //                                  ['@entry' => $submitted_email]));
     // End 03_02_01_Part1/2-Build the Email Submission Form for RSVP List />
 
