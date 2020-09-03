@@ -1,11 +1,11 @@
-## Use for 03_04. This is removed in 03_11
-#rsvplist.form:
+## Use for 03_02_01_Part2/2-Route to Form. This is removed in 03_07_02 Add Routing and Menu Link for RSVP List Administrative Settings Form
+#rsvplist.formdemo:
 #  path: /rsvplistdemo
 #  defaults:
 #    _form: \Drupal\rsvplist\Form\RSVPForm
 #    _title: RSVP to this Event (Demo)
 #  requirements:
-#    _permission: view rsvplist
+#    _permission: access content # change to 'view rsvplist' in 03_05_01 Define RSVP List Permissions
 
 rsvplist.admin_settings:
   path: /admin/config/content/rsvplist
