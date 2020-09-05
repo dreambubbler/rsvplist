@@ -55,7 +55,10 @@ class ReportController extends ControllerBase {
     ];
 
     $rows = [];
-    foreach ($entries = $this->load() as $entry) {
+    // Load the entries using the above load() method.
+    $entries = $this->load();
+
+    foreach ($entries as $entry) {
       $rows[] = $entry;
     }
 
