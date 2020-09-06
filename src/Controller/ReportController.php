@@ -35,6 +35,7 @@ class ReportController extends ControllerBase {
     // https://www.php.net/manual/en/pdostatement.fetch.php
     $entries = $select->execute()->fetchAll(\PDO::FETCH_ASSOC);
 
+    // Return the associative array of RSVPList entries.
     return $entries;
   }
 
@@ -58,10 +59,13 @@ class ReportController extends ControllerBase {
     // Load the entries using the above load() method.
     $entries = $this->load();
 
+    // Go through each entry and add it to $rows. Ultimately each array will be rendered as a row in
+    // an HTML table.
     foreach ($entries as $entry) {
       $rows[] = $entry;
     }
 
+    // Create the render array for rendering an HTML table.
     $content['table'] = [
       '#type' => 'table',
       '#header' => $headers,
@@ -69,9 +73,10 @@ class ReportController extends ControllerBase {
       '#empty' => t('No entries available.'),
     ];
 
-    // Do not cache this page.
+    // Do not cache this page by setting the max-age to 0.
     $content['#cache']['max-age'] = 0;
 
+    // Return the populated render array.
     return $content;
   }
 }
