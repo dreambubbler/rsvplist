@@ -9,13 +9,16 @@ namespace Drupal\rsvplist\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use MongoDB\Driver\Exception\Exception;
+
 // use Exception;
-use Psr\Log\LoggerInterface;
+
 
 class ReportController extends ControllerBase {
 
   protected function load() {
     try {
+      throw new \Exception('on purpose :P');
       // https://www.drupal.org/docs/8/api/database-api/dynamic-queries/introduction-to-dynamic-queries
       $database = \Drupal::database();
       $select = $database->select('rsvplist', 'r');
