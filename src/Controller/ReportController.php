@@ -17,7 +17,8 @@ class ReportController extends ControllerBase {
   protected function load() {
     try {
       // https://www.drupal.org/docs/8/api/database-api/dynamic-queries/introduction-to-dynamic-queries
-      $select = Database::getConnection()->select('rsvplist', 'r');
+      $database = \Drupal::database();
+      $select = $database->select('rsvplist', 'r');
 
       // Join the user table, so we can get the entry creator's username.
       $select->join('users_field_data', 'u', 'r.uid = u.uid');
