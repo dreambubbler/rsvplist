@@ -7,11 +7,9 @@
 
 namespace Drupal\rsvplist;
 
-
 use Drupal\Core\Database\Database;
 use Drupal\jsonapi\JsonApiResource\Data;
 use Drupal\node\Entity\Node;
-use Exception;
 
 class EnablerService {
 
@@ -34,7 +32,7 @@ class EnablerService {
         $insert->execute();
       }
     }
-    catch (Exception $e) {
+    catch (\Exception $e) {
       \Drupal::messenger()->addError(t('Unable to save RSVP settings at this time due to database error. Please try again.'));
     }
   }
