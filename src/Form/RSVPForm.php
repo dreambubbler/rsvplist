@@ -93,7 +93,7 @@ class RSVPForm extends FormBase {
     // Establish the required variables to eventually insert into the database.
     $email = $form_state->getValue('email');
     $nid = $form_state->getValue('nid');
-    $current_time = time();
+    $current_time = \Drupal::time()->getRequestTime();
 
 
     // Begin to build a query builder object $query.

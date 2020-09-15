@@ -1,7 +1,7 @@
 <?php
 
 function rsvplist_schema() {
-  // Create a database table called 'rsvplist' wit the following fields:
+  // Create a database table called 'rsvplist' wit the following columns:
   // 1) id [serial], 2) uid [int], 3) nid [int], 4) mail [varchar], 5) created [int]
   $schema['rsvplist'] = [
     'description' => 'Stores email, timestamp, nid and uid for an RSVP.',
@@ -22,7 +22,7 @@ function rsvplist_schema() {
         'description' => 'The {node}.nid for this RSVP.',
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => TRUE,
+        'not null' => FALSE,
         'default' => 0,
       ],
       'mail' => [
