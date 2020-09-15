@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Install, update and uninstall functions for the rsvplist module.
+ */
+
 function rsvplist_schema() {
   // Create a database table called 'rsvplist' wit the following columns:
   // 1) id [serial], 2) uid [int], 3) nid [int], 4) mail [varchar], 5) created [int]
@@ -9,6 +14,7 @@ function rsvplist_schema() {
       'id' => [
         'description' => 'The primary identifier for the record.',
         'type' => 'serial',
+        'size' => 'small', // tiny / small / medium / normal / big
         'unsigned' => TRUE,
         'not null' => TRUE,
       ],
@@ -22,7 +28,7 @@ function rsvplist_schema() {
         'description' => 'The {node}.nid for this RSVP.',
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => FALSE,
+        'not null' => TRUE,
         'default' => 0,
       ],
       'mail' => [
