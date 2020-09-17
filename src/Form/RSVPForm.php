@@ -79,49 +79,76 @@ class RSVPForm extends FormBase {
     //                                  ['@entry' => $submitted_email]));
     // End 03_02_01_Part1/2-Build the Email Submission Form for RSVP List />
 
+  try {
 
+  }
+  catch (\Exception $e) {
 
-    // < Use below code for videos 03_06_01 Creating RSVP List Subscription Block (03_08) onward.
+  }
 
-    // Get current user ID.
-    $uid = \Drupal::currentUser()->id();
+    // < Use below code for videos 03_04_01 Inserting into the Database Programmatically onward.
+    try {
+      // Begin Phase 1: initiate variables to save.
 
-    // Demonstration for how to load a full user object of the current user. This variable is not needed for this code,
-    // but is shown for demonstration purposes.
-    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+      // Get current user ID.
+      $uid = \Drupal::currentUser()->id();
 
-    // Establish the required variables to eventually insert into the database.
-    $email = $form_state->getValue('email');
-    $nid = $form_state->getValue('nid');
-    $current_time = \Drupal::time()->getRequestTime();
+      // Demonstration for how to load a full user object of the current user.
+      // This $full_user variable is not needed for this code,
+      // but is shown for demonstration purposes.
+      $full_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
 
+      // Obtain values as entered into the Form.
+      $nid = $form_state->getValue('nid');
+      $email = $form_state->getValue('email');
 
-    // Begin to build a query builder object $query.
-    // https://www.drupal.org/docs/8/api/database-api/insert-queries
-    $query = \Drupal::database()->insert('rsvplist');
+      $current_time = \Drupal::time()->getRequestTime();
+      // End Phase 1
 
-    // Specify the fields that the query will insert into.
-    $query->fields([
-      'mail',
-      'nid',
-      'uid',
-      'created',
-    ]);
+      //Begin Phase 2: Save the values to the database
 
-    // Set the values of the fields we selected. Note that they must be in the same order as we defined them
-    // in the $query->fields([...]) above.
-    $query->values([
-      $email,
-      $nid,
-      $uid,
-      $current_time,
-    ]);
+      // Begin to build a query builder object $query.
+      // https://www.drupal.org/docs/8/api/database-api/insert-queries
+      $query = \Drupal::database()->insert('rsvplist');
 
-    // Execute the query! Drupal will handle the correct syntax of the query automatically!
-    $query->execute();
+      // Specify the fields that the query will insert into.
+      $query->fields([
+        'uid',
+        'nid',
+        'mail',
+        'created',
+      ]);
 
-    // Provide the form submitter a nice message.
-    \Drupal::messenger()->addMessage($this->t('Thank you for your RSVP, you are on the list for the event!'));
+      // Set the values of the fields we selected.
+      // Note that they must be in the same order as we defined them
+      // in the $query->fields([...]) above.
+      $query->values([
+        $uid,
+        $nid,
+        $email,
+        $current_time,
+      ]);
+
+      // Execute the query!
+      // Drupal handles the exact syntax of the query automatically!
+      $query->execute();
+      // End Phase 2
+
+      // Begin Phase 3: Display a success message
+
+      // Provide the form submitter a nice message.
+      \Drupal::messenger()->addMessage(
+        $this->t('Thank you for your RSVP, you are on the list for the event!')
+      );
+      // End Phase 3:
+    }
+    catch (\Exception $e) {
+      \Drupal::messenger()->addError(
+        t('Unable to save RSVP settings at this time due to database error.
+           Please try again.')
+      );
+    }
+
   }
   // End 03_06_01 Creating RSVP List Subscription Block (03_08) onwards. />
 }

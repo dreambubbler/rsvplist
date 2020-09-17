@@ -33,7 +33,10 @@ class EnablerService {
       }
     }
     catch (\Exception $e) {
-      \Drupal::messenger()->addError(t('Unable to save RSVP settings at this time due to database error. Please try again.'));
+      \Drupal::messenger()->addError(
+        t('Unable to save RSVP settings at this time due to database error.
+           Please try again.')
+      );
     }
   }
 
