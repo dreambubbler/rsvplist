@@ -105,9 +105,9 @@ class RSVPForm extends FormBase {
       $current_time = \Drupal::time()->getRequestTime();
       // End Phase 1
 
-      //Begin Phase 2: Save the values to the database
+      // Begin Phase 2: Save the values to the database
 
-      // Begin to build a query builder object $query.
+      // Start to build a query builder object $query.
       // https://www.drupal.org/docs/8/api/database-api/insert-queries
       $query = \Drupal::database()->insert('rsvplist');
 
@@ -138,9 +138,9 @@ class RSVPForm extends FormBase {
 
       // Provide the form submitter a nice message.
       \Drupal::messenger()->addMessage(
-        $this->t('Thank you for your RSVP, you are on the list for the event!')
+        t('Thank you for your RSVP, you are on the list for the event!')
       );
-      // End Phase 3:
+      // End Phase 3
     }
     catch (\Exception $e) {
       \Drupal::messenger()->addError(
