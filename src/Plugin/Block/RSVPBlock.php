@@ -8,11 +8,9 @@
 namespace Drupal\rsvplist\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-
-// Use code below for exercise 03_11
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
-// end 03_11
+
 
 /**
  * Provides the RSVP main block.
@@ -49,6 +47,13 @@ class RSVPBlock extends BlockBase {
   public function blockAccess(AccountInterface $account) {
     // If viewing a node, get the fully loaded node object.
     $node = \Drupal::routeMatch()->getParameter('node');
+
+    if ( !(is_null($node)) ) {
+      return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
+    }
+
+    return AccessResult::forbidden();
+
 
     // Some pages may not be nodes, although we could not display the block using the Block Settings through
     // the Block UI at /admin/structure/block, instead we are programmatically controlling to only display
