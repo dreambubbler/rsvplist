@@ -39,8 +39,7 @@ class RSVPSettingsForm extends ConfigFormBase {
       '#title' => $this->t('The content types to enable RSVP collection for'),
       '#default_value' => $config->get('allowed_types'),
       '#options' => $types,
-      '#description' => $this->t('On the specified node types, an RSVP option will be available and can be
-                                  enabled while the node is being edited.'),
+      '#description' => $this->t('On the specified node types, an RSVP option will be available and can be enabled while the node is being edited.'),
     ];
 
     return parent::buildForm($form, $form_state);
@@ -54,8 +53,8 @@ class RSVPSettingsForm extends ConfigFormBase {
     sort($selected_allowed_types);
 
     $this->config('rsvplist.settings')
-       ->set('allowed_types', $selected_allowed_typesallowed_types)
-       ->save();
+      ->set('allowed_types', $selected_allowed_types)
+      ->save();
 
     parent::submitForm($form, $form_state);
   }
