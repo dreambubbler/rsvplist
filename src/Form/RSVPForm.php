@@ -79,12 +79,12 @@ class RSVPForm extends FormBase {
     //                                  ['@entry' => $submitted_email]));
     // End 03_02_01_Part1/2-Build the Email Submission Form for RSVP List />
 
-  try {
-
-  }
-  catch (\Exception $e) {
-
-  }
+//  try {
+//
+//  }
+//  catch (\Exception $e) {
+//
+//  }
 
     // < Use below code for videos 03_04_01 Inserting into the Database Programmatically onward.
     try {
