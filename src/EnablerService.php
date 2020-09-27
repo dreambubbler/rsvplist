@@ -8,7 +8,6 @@
 namespace Drupal\rsvplist;
 
 use Drupal\Core\Database\Connection;
-#use Drupal\Core\Database\Database;
 use Drupal\node\Entity\Node;
 
 class EnablerService {
@@ -30,12 +29,20 @@ class EnablerService {
     if ($node->isNew()) {
       return FALSE;
     }
-    $select = $this->database_connection->select('rsvplist_enabled', 're');
-    $select->fields('re', ['nid']);
-    $select->condition('nid', $node->id());
-    $results = $select->execute();
+    try {
+      $select = $this->database_connection->select('rsvplist_enabled', 're');
+      $select->fields('re', ['nid']);
+      $select->condition('nid', $node->id());
+      $results = $select->execute();
 
-    return !(empty($results->fetchCol()));
+      return !(empty($results->fetchCol()));
+    }
+    catch (\Exception $e) {
+      \Drupal::messenger()->addError(
+        t('Unable to determine RSVP settings at this time. Please try again.')
+      );
+      return NULL;
+    }
   }
 
   /**
@@ -55,8 +62,7 @@ class EnablerService {
     }
     catch (\Exception $e) {
       \Drupal::messenger()->addError(
-        t('Unable to save RSVP settings at this time due to database error.
-           Please try again.')
+        t('Unable to save RSVP settings at this time. Please try again.')
       );
     }
   }
@@ -67,8 +73,15 @@ class EnablerService {
    * @param Node $node
    */
   public function delEnabled(Node $node) {
-    $delete = $this->database_connection->delete('rsvplist_enabled');
-    $delete->condition('nid', $node->id());
-    $delete->execute();
+    try {
+      $delete = $this->database_connection->delete('rsvplist_enabled');
+      $delete->condition('nid', $node->id());
+      $delete->execute();
+    }
+    catch (\Exception $e) {
+      \Drupal::messenger()->addError(
+        t('Unable to save RSVP settings at this time. Please try again.')
+      );
+    }
   }
 }

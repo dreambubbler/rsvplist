@@ -26,15 +26,6 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
       '#weight' => 50,
     ];
 
-
-    // TODO: Replace this markup text with a checkbox that leverages
-    //       the RSVP Enabler service.
-    $form['rsvplist']['rsvplist_enabled'] = [
-      '#markup' => t('Replace  markup with a checkbox after Enabler service ready.'),
-    ];
-
-
-    /** @var \Drupal\rsvplist\EnablerService $enabler */
     $enabler = \Drupal::service('rsvplist.enabler');
     $form['rsvplist']['rsvplist_enabled'] = [
       '#type' => 'checkbox',
@@ -43,8 +34,6 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
     ];
 
     foreach ( array_keys($form['actions']) as $action) {
-      // 1) check to make sure the action is not type
-      // 2) if form[actions][
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) &&
           $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = 'rsvplist_form_node_form_submit';
@@ -62,17 +51,17 @@ function rsvplist_form_node_form_alter(&$form, FormStateInterface $form_state, $
  */
 function rsvplist_form_node_form_submit($form, FormStateInterface $form_state) {
 
-  // TODO: initiate the RSVP enabler service once created.
+  // Initiate the RSVP enabler service once created.
   $enabler = \Drupal::service('rsvplist.enabler');
 
   $node = $form_state->getFormObject()->getEntity();
 
   if ($form_state->getValue('rsvplist_enabled')) {
-    // TODO: Use RSVP enabler service to activate RSVPs on this node
+    // Use RSVP enabler service to activate RSVPs on this node
     $enabler->setEnabled($node);
   }
   else {
-    // TODO: Use RSVP enabler service to disable RSVPs on this node
+    // Use RSVP enabler service to disable RSVPs on this node
     $enabler->delEnabled($node);
   }
 }
