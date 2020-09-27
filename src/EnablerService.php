@@ -7,14 +7,35 @@
 
 namespace Drupal\rsvplist;
 
-use Drupal\Core\Database\Database;
-use Drupal\jsonapi\JsonApiResource\Data;
+use Drupal\Core\Database\Connection;
+#use Drupal\Core\Database\Database;
 use Drupal\node\Entity\Node;
 
 class EnablerService {
 
-  public function __construct() {
+  protected $database_connection;
 
+  public function __construct(Connection $connection) {
+    $this->database_connection = $connection;
+  }
+
+  /**
+   * Checks if an individual node is RSVP enabled.
+   *
+   * @param Node $node
+   * @return bool
+   *  whether or not the node is enabled for the RSVP functionality.
+   */
+  public function isEnabled(Node &$node) {
+    if ($node->isNew()) {
+      return FALSE;
+    }
+    $select = $this->database_connection->select('rsvplist_enabled', 're');
+    $select->fields('re', ['nid']);
+    $select->condition('nid', $node->id());
+    $results = $select->execute();
+
+    return !(empty($results->fetchCol()));
   }
 
   /**
@@ -26,7 +47,7 @@ class EnablerService {
   public function setEnabled(Node $node) {
     try {
       if ( !($this->isEnabled($node)) ) {
-        $insert = Database::getConnection()->insert('rsvplist_enabled');
+        $insert = $this->database_connection->insert('rsvplist_enabled');
         $insert->fields(['nid']);
         $insert->values([$node->id()]);
         $insert->execute();
@@ -41,31 +62,12 @@ class EnablerService {
   }
 
   /**
-   * Checks if an individual node is RSVP enabled.
-   *
-   * @param Node $node
-   * @return bool
-   *  whether or not the node is enabled for the RSVP functionality.
-   */
-  public function isEnabled(Node &$node) {
-    if ($node->isNew()) {
-      return FALSE;
-    }
-    $select = Database::getConnection()->select('rsvplist_enabled', 're');
-    $select->fields('re', ['nid']);
-    $select->condition('nid', $node->id());
-    $results = $select->execute();
-
-    return !(empty($results->fetchCol()));
-  }
-
-  /**
-   * Deletes enabled settings for an individual node.
+   * Deletes RSVP enabled settings for an individual node.
    *
    * @param Node $node
    */
   public function delEnabled(Node $node) {
-    $delete = Database::getConnection()->delete('rsvplist_enabled');
+    $delete = $this->database_connection->delete('rsvplist_enabled');
     $delete->condition('nid', $node->id());
     $delete->execute();
   }
